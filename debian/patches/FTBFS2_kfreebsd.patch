@@ -1,0 +1,148 @@
+this patch addresses build problems on kfreebsd
+Index: pkg-ipsec-tools/configure.ac
+===================================================================
+--- pkg-ipsec-tools.orig/configure.ac	2014-07-10 23:49:48.960506765 -0700
++++ pkg-ipsec-tools/configure.ac	2014-07-10 23:50:04.704584836 -0700
+@@ -34,6 +34,9 @@
+ 	AC_SUBST(INCLUDE_GLIBC)
+ 	AC_SUBST(RPM)
+ 	;;
++*kfreebsd*)
++	LIBS="$LIBS -lresolv"
++	;;
+ *darwin*)
+ 	LIBS="$LIBS -lresolv"
+ 	;;
+@@ -95,6 +98,10 @@
+     CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
+     AC_SUBST(GLIBC_BUGS)
+     ;;
++ *kfreebsd*)
++    # Define _GNU_SOURCE as this is a glibc platform (and in6_pktinfo is hidden behind that define)
++    CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
++    ;;
+  *)
+     if test "$have_net_pfkey$have_netinet_ipsec" != yesyes; then
+       if test "$have_net_pfkey" = yes; then
+@@ -646,7 +653,7 @@
+ #endif
+ ], [kernel_natt="yes"])
+ 	;;
+-freebsd*|netbsd*)
++freebsd*|kfreebsd*|netbsd*)
+ # NetBSD case
+ # Same check for FreeBSD
+ AC_CHECK_MEMBER(struct sadb_x_nat_t_type.sadb_x_nat_t_type_len,
+Index: pkg-ipsec-tools/src/libipsec/key_debug.c
+===================================================================
+--- pkg-ipsec-tools.orig/src/libipsec/key_debug.c	2014-07-10 23:20:44.063854291 -0700
++++ pkg-ipsec-tools/src/libipsec/key_debug.c	2014-07-10 23:50:04.708584863 -0700
+@@ -790,7 +790,7 @@
+ 		    m->m_pkthdr.len, m->m_pkthdr.rcvif);
+ 	}
+ 
+-#ifdef __FreeBSD__
++#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
+ 	if (m->m_flags & M_EXT) {
+ 		printf("  m_ext{ ext_buf:%p ext_free:%p "
+ 		       "ext_size:%u ext_ref:%p }\n",
+Index: pkg-ipsec-tools/src/libipsec/policy_token.c
+===================================================================
+--- pkg-ipsec-tools.orig/src/libipsec/policy_token.c	2014-07-10 23:47:47.399903984 -0700
++++ pkg-ipsec-tools/src/libipsec/policy_token.c	2014-07-10 23:50:04.708584863 -0700
+@@ -617,7 +617,7 @@
+ #include "libpfkey.h"
+ 
+ #if !defined(__NetBSD__) && !defined(__FreeBSD__) && !defined(__linux__)  && \
+-!defined(__APPLE__) && !defined(__MACH__)
++!defined(__APPLE__) && !defined(__MACH__) && !defined(__FreeBSD_kernel__)
+ #include "y.tab.h"
+ #else
+ #include "policy_parse.h"
+Index: pkg-ipsec-tools/src/libipsec/policy_token.l
+===================================================================
+--- pkg-ipsec-tools.orig/src/libipsec/policy_token.l	2014-07-10 23:20:44.063854291 -0700
++++ pkg-ipsec-tools/src/libipsec/policy_token.l	2014-07-10 23:50:04.712584878 -0700
+@@ -52,7 +52,7 @@
+ #include "libpfkey.h"
+ 
+ #if !defined(__NetBSD__) && !defined(__FreeBSD__) && !defined(__linux__)  && \
+-!defined(__APPLE__) && !defined(__MACH__)
++!defined(__APPLE__) && !defined(__MACH__) && !defined(__FreeBSD_kernel__)
+ #include "y.tab.h"
+ #else
+ #include "policy_parse.h"
+Index: pkg-ipsec-tools/src/racoon/isakmp.c
+===================================================================
+--- pkg-ipsec-tools.orig/src/racoon/isakmp.c	2014-07-10 23:47:47.411904047 -0700
++++ pkg-ipsec-tools/src/racoon/isakmp.c	2014-07-10 23:50:04.716584897 -0700
+@@ -122,12 +122,15 @@
+ #  endif
+ # endif /* __linux__ */
+ # if defined(__NetBSD__) || defined(__FreeBSD__) ||	\
+-  (defined(__APPLE__) && defined(__MACH__))
++  (defined(__APPLE__) && defined(__MACH__)) || defined(__FreeBSD_kernel__)
++#  define __FAVOR_BSD	/* GNU/kFreeBSD */
+ #  include <netinet/in.h>
+ #  include <netinet/udp.h>
+ #  include <netinet/in_systm.h>
+ #  include <netinet/ip.h>
+-#  define SOL_UDP IPPROTO_UDP
++#  ifndef SOL_UDP
++#   define SOL_UDP IPPROTO_UDP
++#  endif
+ # endif /* __NetBSD__ / __FreeBSD__ */
+ 
+ static int nostate1 __P((struct ph1handle *, vchar_t *));
+Index: pkg-ipsec-tools/src/racoon/nattraversal.c
+===================================================================
+--- pkg-ipsec-tools.orig/src/racoon/nattraversal.c	2014-07-10 23:20:44.063854291 -0700
++++ pkg-ipsec-tools/src/racoon/nattraversal.c	2014-07-10 23:50:04.720584923 -0700
+@@ -38,7 +38,7 @@
+ #ifdef __linux__
+ #include <linux/udp.h>
+ #endif
+-#if defined(__NetBSD__) || defined (__FreeBSD__)
++#if defined(__NetBSD__) || defined (__FreeBSD__) || defined(__FreeBSD_kernel__)
+ #include <netinet/udp.h>
+ #endif
+ 
+Index: pkg-ipsec-tools/src/racoon/pfkey.c
+===================================================================
+--- pkg-ipsec-tools.orig/src/racoon/pfkey.c	2014-07-10 23:20:44.063854291 -0700
++++ pkg-ipsec-tools/src/racoon/pfkey.c	2014-07-10 23:50:04.720584923 -0700
+@@ -50,7 +50,7 @@
+ #  include <linux/udp.h>
+ # endif
+ # if defined(__NetBSD__) || defined(__FreeBSD__) ||	\
+-  (defined(__APPLE__) && defined(__MACH__))
++  (defined(__APPLE__) && defined(__MACH__)) || defined(__FreeBSD_kernel__)
+ #  include <netinet/udp.h>
+ # endif
+ #endif
+Index: pkg-ipsec-tools/src/setkey/token.c
+===================================================================
+--- pkg-ipsec-tools.orig/src/setkey/token.c	2014-07-10 23:47:47.423904103 -0700
++++ pkg-ipsec-tools/src/setkey/token.c	2014-07-10 23:50:04.724584934 -0700
+@@ -1043,7 +1043,7 @@
+ 
+ #include "vchar.h"
+ #if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__linux__) || \
+-(defined(__APPLE__) && defined(__MACH__))
++(defined(__APPLE__) && defined(__MACH__)) || defined(__FreeBSD_kernel__)
+ #include "parse.h"
+ #else
+ #include "y.tab.h"
+Index: pkg-ipsec-tools/src/setkey/token.l
+===================================================================
+--- pkg-ipsec-tools.orig/src/setkey/token.l	2014-07-10 23:20:44.063854291 -0700
++++ pkg-ipsec-tools/src/setkey/token.l	2014-07-10 23:50:04.728584955 -0700
+@@ -53,7 +53,7 @@
+ 
+ #include "vchar.h"
+ #if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__linux__) || \
+-(defined(__APPLE__) && defined(__MACH__))
++(defined(__APPLE__) && defined(__MACH__)) || defined(__FreeBSD_kernel__)
+ #include "parse.h"
+ #else
+ #include "y.tab.h"

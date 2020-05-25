@@ -1,0 +1,87 @@
+# 
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+# 
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+# 
+#    Developers do not need to manually edit POT or PO files.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: ipsec-tools 1:0.8.0-14\n"
+"Report-Msgid-Bugs-To: ipsec-tools@packages.debian.org\n"
+"POT-Creation-Date: 2012-06-30 16:16+0200\n"
+"PO-Revision-Date: 2012-06-30 23:16+0900\n"
+"Last-Translator: Hideki Yamane (Debian-JP) <henrich@debian.or.jp>\n"
+"Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: select
+#. Choices
+#: ../racoon.templates:2001
+msgid "direct"
+msgstr "直接"
+
+#. Type: select
+#. Choices
+#: ../racoon.templates:2001
+msgid "racoon-tool"
+msgstr "racoon-tool"
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid "Configuration mode for racoon IKE daemon:"
+msgstr "racoon IKE デーモンの設定方法:"
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid ""
+"Racoon can be configured either directly, by editing /etc/racoon/racoon."
+"conf, or using the racoon-tool administrative front end."
+msgstr ""
+"racoon は /etc/racoon/racoon.conf を直接編集するか racoon-tool 管理用フロント"
+"エンドを利用することにより設定可能です。"
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid ""
+"Use of the \"direct\" method is strongly recommended if you want to use all "
+"the racoon examples on the Net, and if you want to use the full racoon "
+"feature set. You will have to directly edit /etc/racoon/racoon.conf and "
+"possibly manually set up the Security Policy Database via setkey."
+msgstr ""
+"インターネット上にある racoon 使用例を全て使いたい、あるいは racoon の機能群を"
+"全て利用したい場合は「直接」設定する方法を強く勧めます。/etc/racoon/racoon."
+"conf を直接編集する必要があります。setkey を経由して手作業でセキュリティポリ"
+"シーデータベースを用意することも必要となるかもしれません。"
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid ""
+"Racoon-tool has been updated for racoon 0.8.0, and is for use in basic "
+"configuration setups. It gives the benefit of managing the SPD along with "
+"the IKE that strongSwan offers. IPv6, transport/tunnel mode (ESP/AH), PSK/"
+"X509 auth, and basic \"anonymous\" VPN server are supported."
+msgstr ""
+"Racoon-tool が racoon 0.8.0 用に更新され、基礎的な設定に利用するようになってい"
+"ます。これにより strongSwan が提供する IKE と共に SPD を管理できる利点がもたら"
+"されています。IPv6 や転送/トンネルモード (ESP/AH)、PSK/X509 認証、基本的な「匿"
+"名」VPN サーバをサポートしています。"
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid "More information is available in /usr/share/doc/racoon/README.Debian."
+msgstr "さらなる情報が /usr/share/doc/racoon/README.Debian にあります。"

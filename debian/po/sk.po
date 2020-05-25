@@ -1,0 +1,80 @@
+# Slovak translation of ipsec-tools debconf templates.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the ipsec-tools package.
+# Ivan Masár <helix84@centrum.sk>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ipsec-tools\n"
+"Report-Msgid-Bugs-To: ipsec-tools@packages.debian.org\n"
+"POT-Creation-Date: 2012-06-30 16:16+0200\n"
+"PO-Revision-Date: 2012-07-01 19:15+0100\n"
+"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
+"Language-Team: Slovak <debian-l10n-slovak@lists.debian.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: select
+#. Choices
+#: ../racoon.templates:2001
+msgid "direct"
+msgstr "priamo"
+
+#. Type: select
+#. Choices
+#: ../racoon.templates:2001
+msgid "racoon-tool"
+msgstr "racoon-tool"
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid "Configuration mode for racoon IKE daemon:"
+msgstr "Režim konfigurácie démona IKE racoon:"
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid ""
+"Racoon can be configured either directly, by editing /etc/racoon/racoon."
+"conf, or using the racoon-tool administrative front end."
+msgstr ""
+"Racoon je možné nakonfigurovať buď priamo, úpravou /etc/racoon/racoon.conf "
+"alebo použitím správcovského rozhrania racoon-tool."
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid ""
+"Use of the \"direct\" method is strongly recommended if you want to use all "
+"the racoon examples on the Net, and if you want to use the full racoon "
+"feature set. You will have to directly edit /etc/racoon/racoon.conf and "
+"possibly manually set up the Security Policy Database via setkey."
+msgstr ""
+"Dôrazne sa odporúča použiť spôsob „priamo“ ak chcete používať všetk príklade "
+"racoon z internetu a ak chcete používať kompletnú sadu vlastností racoon. "
+"Budete musieť priamo upraviť /etc/racoon/racoon.conf a možno aj nastaviť "
+"Databázu bezpečnostných politík prostredníctvom setkey."
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid ""
+"Racoon-tool has been updated for racoon 0.8.0, and is for use in basic "
+"configuration setups. It gives the benefit of managing the SPD along with "
+"the IKE that strongSwan offers. IPv6, transport/tunnel mode (ESP/AH), PSK/"
+"X509 auth, and basic \"anonymous\" VPN server are supported."
+msgstr ""
+"Racoon-tool bol aktualizovaný na racoon 0.8.0 a slúži na použitie na "
+"nastavenie základných konfigurácií. Jeho výhodou je správa SPD spolu s IDE, "
+"ktorý ponúka strongSwan. Podporované je IPv6, režim transport/tunel (ESP/"
+"AH), overenie totožnosti PSK/X509 a základný „anonýmný“ VPN server."
+
+#. Type: select
+#. Description
+#: ../racoon.templates:2002
+msgid "More information is available in /usr/share/doc/racoon/README.Debian."
+msgstr ""
+"Ďalšie informácie sú dostupné v súbore /usr/share/doc/racoon/README.Debian."

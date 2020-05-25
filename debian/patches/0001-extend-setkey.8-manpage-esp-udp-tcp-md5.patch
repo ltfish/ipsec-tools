@@ -1,0 +1,25 @@
+Patch to document esp-udp algo for setkey as well as lack of tcp-md5 support for
+linux systems
+
+Index: pkg-ipsec-tools/src/setkey/setkey.8
+===================================================================
+--- pkg-ipsec-tools.orig/src/setkey/setkey.8	2014-04-25 23:35:23.067731107 -0700
++++ pkg-ipsec-tools/src/setkey/setkey.8	2014-04-25 23:35:30.947770182 -0700
+@@ -255,6 +255,8 @@
+ ESP based on rfc2406
+ .It Li esp-old
+ ESP based on rfc1827
++.It Li esp-udp
++ESP-UDP based on rfc3948
+ .It Li ah
+ AH based on rfc2402
+ .It Li ah-old
+@@ -700,7 +702,7 @@
+ 				ah-old: 128bit ICV (no document)
+ aes-xcbc-mac	128		ah: 96bit ICV (RFC3566)
+ 		128		ah-old: 128bit ICV (no document)
+-tcp-md5		8 to 640	tcp: rfc2385
++tcp-md5		8 to 640	tcp: rfc2385 (tcp-md5 support only on BSD)
+ .Ed
+ .Pp
+ These encryption algorithms can be used as
