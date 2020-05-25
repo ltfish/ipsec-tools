@@ -59,7 +59,7 @@
 #include <sys/param.h>
 #include <sys/socket.h>
 #include <sys/queue.h>
-#include <sys/sysctl.h>
+//#include <sys/sysctl.h>
 
 #include <net/route.h>
 #include <net/pfkeyv2.h>

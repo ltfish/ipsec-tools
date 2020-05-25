@@ -92,13 +92,15 @@ struct rsa_key *
 rsa_key_dup(struct rsa_key *key)
 {
 	struct rsa_key *new;
+	const BIGNUM *d = NULL;
 
 	new = calloc(sizeof(struct rsa_key), 1);
 	if (new == NULL)
 		return NULL;
 
 	if (key->rsa) {
-		new->rsa = key->rsa->d != NULL ? RSAPrivateKey_dup(key->rsa) : RSAPublicKey_dup(key->rsa);
+		RSA_get0_key(key->rsa, NULL, NULL, &d);
+		new->rsa = d != NULL ? RSAPrivateKey_dup(key->rsa) : RSAPublicKey_dup(key->rsa);
 		if (new->rsa == NULL)
 			goto dup_error;
 	}

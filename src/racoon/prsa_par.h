@@ -1,19 +1,20 @@
-/* A Bison parser, made by GNU Bison 2.6.2.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison interface for Yacc-like parsers in C
-   
-      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
-   
+
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,13 +27,16 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef PRSA_PRSA_PAR_H
-# define PRSA_PRSA_PAR_H
-/* Enabling traces.  */
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
+#ifndef YY_PRSA_PRSA_PAR_H_INCLUDED
+# define YY_PRSA_PRSA_PAR_H_INCLUDED
+/* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
 #endif
@@ -40,34 +44,33 @@
 extern int prsadebug;
 #endif
 
-/* Tokens.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     COLON = 258,
-     HEX = 259,
-     OBRACE = 260,
-     EBRACE = 261,
-     TAG_RSA = 262,
-     TAG_PUB = 263,
-     TAG_PSK = 264,
-     MODULUS = 265,
-     PUBLIC_EXPONENT = 266,
-     PRIVATE_EXPONENT = 267,
-     PRIME1 = 268,
-     PRIME2 = 269,
-     EXPONENT1 = 270,
-     EXPONENT2 = 271,
-     COEFFICIENT = 272,
-     ADDR4 = 273,
-     ADDR6 = 274,
-     ADDRANY = 275,
-     SLASH = 276,
-     NUMBER = 277,
-     BASE64 = 278
-   };
+  enum yytokentype
+  {
+    COLON = 258,
+    HEX = 259,
+    OBRACE = 260,
+    EBRACE = 261,
+    TAG_RSA = 262,
+    TAG_PUB = 263,
+    TAG_PSK = 264,
+    MODULUS = 265,
+    PUBLIC_EXPONENT = 266,
+    PRIVATE_EXPONENT = 267,
+    PRIME1 = 268,
+    PRIME2 = 269,
+    EXPONENT1 = 270,
+    EXPONENT2 = 271,
+    COEFFICIENT = 272,
+    ADDR4 = 273,
+    ADDR6 = 274,
+    ADDRANY = 275,
+    SLASH = 276,
+    NUMBER = 277,
+    BASE64 = 278
+  };
 #endif
 /* Tokens.  */
 #define COLON 258
@@ -92,12 +95,10 @@ extern int prsadebug;
 #define NUMBER 277
 #define BASE64 278
 
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
+union YYSTYPE
 {
-/* Line 2049 of yacc.c  */
 #line 130 "prsa_par.y"
 
 	BIGNUM *bn;
@@ -106,29 +107,17 @@ typedef union YYSTYPE
 	long num;
 	struct netaddr *naddr;
 
+#line 111 "prsa_par.h"
 
-/* Line 2049 of yacc.c  */
-#line 112 "prsa_par.h"
-} YYSTYPE;
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+
 extern YYSTYPE prsalval;
 
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int prsaparse (void *YYPARSE_PARAM);
-#else
-int prsaparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
 int prsaparse (void);
-#else
-int prsaparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
 
-#endif /* !PRSA_PRSA_PAR_H  */
+#endif /* !YY_PRSA_PRSA_PAR_H_INCLUDED  */

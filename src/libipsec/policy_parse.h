@@ -1,19 +1,20 @@
-/* A Bison parser, made by GNU Bison 2.6.2.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison interface for Yacc-like parsers in C
-   
-      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
-   
+
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,13 +27,16 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef _LIBIPSEC_POLICY_PARSE_H
-# define _LIBIPSEC_POLICY_PARSE_H
-/* Enabling traces.  */
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
+#ifndef YY__LIBIPSEC_POLICY_PARSE_H_INCLUDED
+# define YY__LIBIPSEC_POLICY_PARSE_H_INCLUDED
+/* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
 #endif
@@ -40,29 +44,28 @@
 extern int __libipsecdebug;
 #endif
 
-/* Tokens.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     DIR = 258,
-     PRIORITY = 259,
-     PLUS = 260,
-     PRIO_BASE = 261,
-     PRIO_OFFSET = 262,
-     ACTION = 263,
-     PROTOCOL = 264,
-     MODE = 265,
-     LEVEL = 266,
-     LEVEL_SPECIFY = 267,
-     IPADDRESS = 268,
-     PORT = 269,
-     ME = 270,
-     ANY = 271,
-     SLASH = 272,
-     HYPHEN = 273
-   };
+  enum yytokentype
+  {
+    DIR = 258,
+    PRIORITY = 259,
+    PLUS = 260,
+    PRIO_BASE = 261,
+    PRIO_OFFSET = 262,
+    ACTION = 263,
+    PROTOCOL = 264,
+    MODE = 265,
+    LEVEL = 266,
+    LEVEL_SPECIFY = 267,
+    IPADDRESS = 268,
+    PORT = 269,
+    ME = 270,
+    ANY = 271,
+    SLASH = 272,
+    HYPHEN = 273
+  };
 #endif
 /* Tokens.  */
 #define DIR 258
@@ -82,12 +85,10 @@ extern int __libipsecdebug;
 #define SLASH 272
 #define HYPHEN 273
 
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
+union YYSTYPE
 {
-/* Line 2049 of yacc.c  */
 #line 129 "policy_parse.y"
 
 	u_int num;
@@ -97,29 +98,17 @@ typedef union YYSTYPE
 		char *buf;
 	} val;
 
+#line 102 "policy_parse.h"
 
-/* Line 2049 of yacc.c  */
-#line 103 "policy_parse.h"
-} YYSTYPE;
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+
 extern YYSTYPE __libipseclval;
 
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int __libipsecparse (void *YYPARSE_PARAM);
-#else
-int __libipsecparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
 int __libipsecparse (void);
-#else
-int __libipsecparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
 
-#endif /* !_LIBIPSEC_POLICY_PARSE_H  */
+#endif /* !YY__LIBIPSEC_POLICY_PARSE_H_INCLUDED  */

@@ -96,6 +96,7 @@ rsa_verify_with_pubkey(src, sig, pubkey_txt)
 	BIO *bio;
 	EVP_PKEY *evp;
 	int error;
+	RSA *rsa;
 
 	bio = BIO_new_mem_buf(pubkey_txt, strlen(pubkey_txt));
 	evp = PEM_read_bio_PUBKEY(bio, NULL, NULL, NULL);
@@ -103,7 +104,8 @@ rsa_verify_with_pubkey(src, sig, pubkey_txt)
 		printf ("PEM_read_PUBKEY(): %s\n", eay_strerror());
 		return -1;
 	}
-	error = eay_check_rsasign(src, sig, evp->pkey.rsa);
+	rsa = EVP_PKEY_get0_RSA(evp);
+	error = eay_check_rsasign(src, sig, rsa);
 
 	return error;
 }

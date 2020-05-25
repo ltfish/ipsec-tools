@@ -3110,7 +3110,7 @@ script_hook(iph1, script)
 	int script;
 {
 #define IP_MAX 40
-#define PORT_MAX 6
+#define PORT_MAX 10
 	char addrstr[IP_MAX];
 	char portstr[PORT_MAX];
 	char **envp = NULL;

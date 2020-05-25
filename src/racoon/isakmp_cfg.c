@@ -115,7 +115,7 @@ static vchar_t *isakmp_cfg_void(struct ph1handle *, struct isakmp_data *);
 static vchar_t *isakmp_cfg_addr4(struct ph1handle *, 
 				 struct isakmp_data *, in_addr_t *);
 static vchar_t *isakmp_cfg_addrnet4(struct ph1handle *, 
-				 struct isakmp_data *, in_addr_t *, in_addr_t *);
+				 struct isakmp_data *, in_addr_t, in_addr_t);
 static void isakmp_cfg_getaddr4(struct isakmp_data *, struct in_addr *);
 static vchar_t *isakmp_cfg_addr4_list(struct ph1handle *,
 				      struct isakmp_data *, in_addr_t *, int);
@@ -931,8 +931,8 @@ retry_source:
 	case INTERNAL_IP4_SUBNET:
 		if(isakmp_cfg_config.splitnet_count > 0){
 			return isakmp_cfg_addrnet4(iph1, attr,
-						    &isakmp_cfg_config.splitnet_list->network.addr4.s_addr,
-						    &isakmp_cfg_config.splitnet_list->network.mask4.s_addr);
+						    isakmp_cfg_config.splitnet_list->network.addr4.s_addr,
+						    isakmp_cfg_config.splitnet_list->network.mask4.s_addr);
 		}else{
 			plog(LLV_INFO, LOCATION, NULL,
 			     "%s requested but no splitnet in configuration\n",
@@ -1083,8 +1083,8 @@ static vchar_t *
 isakmp_cfg_addrnet4(iph1, attr, addr, mask)
 	struct ph1handle *iph1;
 	struct isakmp_data *attr;
-	in_addr_t *addr;
-	in_addr_t *mask;
+	in_addr_t addr;
+	in_addr_t mask;
 {
 	vchar_t *buffer;
 	struct isakmp_data *new;
@@ -1101,8 +1101,8 @@ isakmp_cfg_addrnet4(iph1, attr, addr, mask)
 
 	new->type = attr->type;
 	new->lorv = htons(len);
-	netbuff[0]=*addr;
-	netbuff[1]=*mask;
+	netbuff[0]=addr;
+	netbuff[1]=mask;
 	memcpy(new + 1, netbuff, len);
 	
 	return buffer;
