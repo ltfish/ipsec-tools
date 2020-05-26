@@ -1,6 +1,6 @@
 Source: ipsec-tools
 Section: net
-Priority: extra
+Priority: optional
 Maintainer: pkg-ipsec-tools team <pkg-ipsec-tools-devel@lists.alioth.debian.org>
 Uploaders: Noah Meyerhans <noahm@debian.org>,
            Matt Grant <matt@mattgrant.net.nz>,
@@ -13,7 +13,7 @@ Build-Depends: bison,
                libkrb5-dev,
                libldap2-dev,
                libpam0g-dev,
-               libssl1.0-dev | libssl-dev (<< 1.1.0~),
+               libssl-dev,
                po-debconf
 Standards-Version: 4.0.0
 Vcs-Git: https://anonscm.debian.org/pkg-ipsec-tools/pkg-ipsec-tools.git
